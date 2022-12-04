@@ -1,0 +1,12 @@
+﻿@page "/productlist"
+<h4>What is your Name?</h4>
+<hr size="3" noshade>
+<p>My name is @Name</p>
+<hr size="3" noshade>
+<h3>ProductList</h3>
+@foreach(var item in p){
+    <ul>
+        <li>@item.Description</li>
+    </ul>
+}
+
