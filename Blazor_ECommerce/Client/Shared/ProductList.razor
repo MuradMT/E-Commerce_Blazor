@@ -1,12 +1,71 @@
 ﻿@page "/productlist"
+<h3>ProductList</h3>
+<ul class="list-unstyled">
+    @foreach (var product in p)
+    {
+        <li class="media my-3">
+            <div class="media-img-wrapper mr-2">
+                <a href="#">
+                    <img class="media-img" src="@product.ImageUrl" alt="@product.Tittle" />
+                </a>
+            </div>
+            <div class="media-body">
+                <a href="#">
+                    <h4 class="mb-0">@product.Tittle</h4>
+                </a>
+                <p>@product.Description</p>
+                <h5 class="price">
+                    $@product.Price
+                </h5>
+            </div>
+        </li>
+    }
+</ul>
+@*<hr size="3" noshade>
 <h4>What is your Name?</h4>
 <hr size="3" noshade>
 <p>My name is @Name</p>
-<hr size="3" noshade>
-<h3>ProductList</h3>
 @foreach(var item in p){
-    <ul>
+    <ul class="list-group-item-primary">
         <li>@item.Description</li>
     </ul>
+}
+<p>Do you want to open secret key?</p>
+<button @onclick="()=>var=true">Get</button>
+@if (var)
+{
+    <p >@Show</p>
+}
+<p >@data</p>
+<button @onclick="Open">Open </button>
+<button @onclick="Close">Close secret key</button>
+<p>onclick event get anonymoys method<br />
+this methods delegate looks like public delegate void Metod()</p>
+    <p>@item</p>
+<button @onclick="Changer">Click</button>*@
+@code{
+    #region Mock
+    //string item = "salam dunya";
+    //int i = 5;
+    //bool var = false;
+    //string data;
+    //string Show="Hello World";
+    //string close = null;
+    //public void Close(){
+    //    data = close;
+    //}
+    //public void Open()
+    //{
+    //    data = Show;
+    //}
+    //public void Changer(){
+    //    if(item!=Show){
+    //        item = Show;
+    //    }
+    //    else{
+    //        item ="salam dunya";
+    //    }
+    //}
+    #endregion
 }
 
