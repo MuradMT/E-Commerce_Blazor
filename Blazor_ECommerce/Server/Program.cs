@@ -1,4 +1,6 @@
 global using Blazor_ECommerce.Shared.Models;
+global using Microsoft.EntityFrameworkCore;
+using Blazor_ECommerce.Server.Data;
 using Microsoft.AspNetCore.ResponseCompression;
 
 namespace Blazor_ECommerce
@@ -10,12 +12,13 @@ namespace Blazor_ECommerce
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
+            builder.Services.AddDbContext<DataContext>(options=>options.UseSqlServer(
+                builder.Configuration.GetConnectionString("CS")));
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            
             var app = builder.Build();
             app.UseSwaggerUI();
             // Configure the HTTP request pipeline.
