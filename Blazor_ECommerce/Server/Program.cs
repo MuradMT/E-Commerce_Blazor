@@ -1,5 +1,6 @@
 global using Blazor_ECommerce.Shared.Models;
 global using Microsoft.EntityFrameworkCore;
+global using Blazor_ECommerce.Server.Services.ProductService;
 using Blazor_ECommerce.Server.Data;
 using Microsoft.AspNetCore.ResponseCompression;
 
@@ -18,7 +19,7 @@ namespace Blazor_ECommerce
             builder.Services.AddRazorPages();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            
+            builder.Services.AddScoped<IProductService, ProductService>();
             var app = builder.Build();
             app.UseSwaggerUI();
             // Configure the HTTP request pipeline.
