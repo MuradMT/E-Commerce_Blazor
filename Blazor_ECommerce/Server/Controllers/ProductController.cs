@@ -1,4 +1,5 @@
 ﻿using Blazor_ECommerce.Server.Data;
+using Blazor_ECommerce.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blazor_ECommerce.Server.Controllers
@@ -7,20 +8,18 @@ namespace Blazor_ECommerce.Server.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly DataContext _db;
+        private readonly IProductService _productService;
 
-        public ProductController(DataContext db)
+        public ProductController(IProductService productService)
         {
-            _db = db;
+            _productService=productService;
         }
         
         [HttpGet("Get")]
-        public async Task<ActionResult<List<Product>>> GetProducts()
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProducts()
         {
-            //there are two way for getting data from database the examples
-            //shown below
-            //var r=await _db.Set<Product>().ToListAsync();
-            var result= await _db.Products.ToListAsync();
+          
+            var result= await _productService.GetAllProducts();
             return Ok(result);
         }
     }
