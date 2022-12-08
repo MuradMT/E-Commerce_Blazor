@@ -1,27 +1,35 @@
 ﻿@page "/productlist"
-@inject HttpClient http
+@inject IProductService _prod;
 <h3>ProductList</h3>
-<ul class="list-unstyled">
-    @foreach (var product in products)
-    {
-        <li class="media my-3">
-            <div class="media-img-wrapper mr-2">
-                <a href="#">
-                    <img class="media-img" src="@product.ImageUrl" alt="@product.Tittle" />
-                </a>
-            </div>
-            <div class="media-body">
-                <a href="#">
-                    <h4 class="mb-0">@product.Tittle</h4>
-                </a>
-                <p>@product.Description</p>
-                <h5 class="price">
-                    $@product.Price
-                </h5>
-            </div>
-        </li>
-    }
-</ul>
+@if (_prod.products == null || _prod.products.Count == 0)
+{
+    <span>Loading Products...</span>
+}
+else
+{
+    <ul class="list-unstyled">
+        @foreach (var product in _prod.products)
+        {
+            <li class="media my-3">
+                <div class="media-img-wrapper mr-2">
+                    <a href="#">
+                        <img class="media-img" src="@product.ImageUrl" alt="@product.Tittle" />
+                    </a>
+                </div>
+                <div class="media-body">
+                    <a href="#">
+                        <h4 class="mb-0">@product.Tittle</h4>
+                    </a>
+                    <p>@product.Description</p>
+                    <h5 class="price">
+                        $@product.Price
+                    </h5>
+                </div>
+            </li>
+        }
+    </ul>
+}
+
 @*<hr size="3" noshade>
 <h4>What is your Name?</h4>
 <hr size="3" noshade>
