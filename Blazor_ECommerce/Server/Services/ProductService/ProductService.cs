@@ -23,5 +23,21 @@ namespace Blazor_ECommerce.Server.Services.ProductService
             };
             return response;
         }
+
+        public async Task<ServiceResponse<Product>> GetProduct(int id)
+        {
+            var response = new ServiceResponse<Product>();
+            var product=await _db.Products.FindAsync(id);
+            if(product == null)
+            {
+                response.Success = false;
+                response.Message = "this is not exist";
+            }
+            else
+            {
+                response.Data = product;
+            }
+            return response;
+        }
     }
 }
