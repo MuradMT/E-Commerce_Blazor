@@ -2,7 +2,7 @@
 @inject IProductService productService
 @if (product == null)
 {
-    <span>Loading...</span>
+    <span>@message</span>
 }
 else
 {
@@ -23,11 +23,19 @@ else
 
 @code {
     Product product = null;
+    string message = string.Empty;
     [Parameter]
     public int Id { get; set; }
     protected async override Task OnParametersSetAsync()
     {
-        product = productService.products.Find(p => p.Id == Id);
+        message = "Loading";
+        var result=await productService.GetProduct(Id);
+        if(!result.Success){
+            message = result.Message;
+        }
+        else{
+            product = result.Data;
+        }
 
     }
 
